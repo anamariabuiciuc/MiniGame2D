@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include<windows.h>
+#include <windows.h>
 #include <GL/freeglut.h>
 
 using namespace std;
@@ -39,11 +39,9 @@ void init(void)
 
 void RenderString(float x, float y, void* font, const unsigned char* string)
 {
-
 	glColor3f(1.0f, 1.0f, 1.0f); //culoare font
 	glRasterPos2f(x, y);
 	glutBitmapString(font, string);
-
 }
 
 void startgame(void)
@@ -64,7 +62,6 @@ void startgame(void)
 		{
 			score += 100;
 			height = vector[rand() % 3];
-			//cout << "Score:  " << score << endl;
 			loc_vert = 1000;
 		}
 
@@ -87,6 +84,7 @@ void startgame(void)
 
 
 void drawFantoma(void) {
+
 	//corpul fantomei
 	glColor3f(0.471, 0.667, 0.949);
 	glBegin(GL_POLYGON);
@@ -141,11 +139,9 @@ void drawFantoma(void) {
 	glVertex2f(-17.4292351996575, 18.0814790701229);
 	glVertex2f(-25.0492088497156, 21.2191152789704);
 	glVertex2f(-32.2209487556527, 23.4602839995757);
-	//am mai adaugat O2, P2;
 	glVertex2f(-35.3950684577688, 24.2414931671267);
 	glVertex2f(-37.0873199801594, 23.9312470546885);
 	glVertex2f(-38.9444549174687, 23.0120502554547);
-	//am mai adaugat N2;
 	glVertex2f(-38.7513673105101, 20.9416026984651);
 	glVertex2f(-38.0187800108894, 18.813707777508);
 	glVertex2f(-35.8633112492746, 17.3214601733131);
@@ -211,15 +207,10 @@ void drawScene(void)
 		glRecti(250, 50, 400, 100);
 		RenderString(300.0f, 68.0f, GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)"Greu");
 
-		
-		
-
 		drawFantoma();
-		
-		
-	
+
 	}
-	
+
 	else {
 		// Margine jos
 		glBegin(GL_POLYGON);
@@ -236,18 +227,18 @@ void drawScene(void)
 		glVertex2i(700, 460); // Dreapta sus
 		glVertex2i(-100, 460);// Stanga sus
 		glEnd();
+
 		RenderString(200.0f, 425.0f, GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)"Fereste-te de fantome!");
 
 		//Afisare scor pe display
 		glColor3f(1.0, 1.0, 1.0);
 		glRasterPos2f(225.0f, -120.0f);
-		std::string stringScore = "SCOR: " + std::to_string(score);
+		string stringScore = "SCOR: " + to_string(score);
 		glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)stringScore.c_str());
 
 		// Delimitare sosea
 		glLineWidth(6);
 		glColor3f(0, 0.17, 0.5);
-
 
 		// Delimitam soseaua de marginea de jos
 		glBegin(GL_LINES);
@@ -280,7 +271,7 @@ void drawScene(void)
 
 		glDisable(GL_LINE_STIPPLE);
 
-		//desenam caracterul9jucatorul) Patratel
+		//desenam caracterul Patratel
 		glPushMatrix();
 		glTranslated(0.0, j, 0.0);
 
@@ -341,10 +332,10 @@ void drawScene(void)
 		glPopMatrix();
 		glPopMatrix();
 
+		//Game Over
 		if (ok == 0) {
-			RenderString(250.0f, 200.0f, GLUT_BITMAP_8_BY_13, (const unsigned char*)"AI FOST MANCAT..");
+			RenderString(250.0f, 200.0f, GLUT_BITMAP_8_BY_13, (const unsigned char*)"AI FOST MANCAT...");
 		}
-
 
 		if (contor == 1 && (j != 160 && j != 320))
 			j = j + 1;
@@ -417,7 +408,6 @@ void miscajos(void)
 void keyboard(int key, int x, int y)
 {
 
-
 	switch (key) {
 	case GLUT_KEY_UP:
 		miscasus();
@@ -426,8 +416,6 @@ void keyboard(int key, int x, int y)
 		miscajos();
 		break;
 	}
-
-
 
 }
 
@@ -442,8 +430,6 @@ void processNormalKeys(unsigned char key, int x, int y) {
 
 void Initialize(int key)
 {
-
-
 	switch (key)
 	{
 	case 0:
@@ -460,8 +446,6 @@ void Initialize(int key)
 		break;
 	}
 
-
-
 }
 
 void callback_Main(int key)
@@ -471,11 +455,13 @@ void callback_Main(int key)
 		exit(0);
 	}
 }
+
 void callback_Color(int key)
 {
 	currentColor = key;
 }
 
+//meniul de start - alegere dificultate joc
 void mouse(int button, int state, int mx, int my)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
@@ -506,8 +492,6 @@ void mouse(int button, int state, int mx, int my)
 
 int main(int argc, char** argv)
 {
-	
-	
 	int menuMain, menuBackground, menuColor;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -520,8 +504,6 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);
 	glutSpecialFunc(keyboard);
 	glutKeyboardFunc(processNormalKeys);
-	
-	
 
 	menuBackground = glutCreateMenu(Initialize);
 	glutAddMenuEntry("Bleumarin", 0);
